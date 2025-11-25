@@ -4,9 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vedha Analytics | Innovating India</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer/build/spline-viewer.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         darkMode: 'class',
@@ -17,10 +16,10 @@
               display: ['Outfit', 'sans-serif'],
             },
             colors: {
-              'vedha-navy': '#030712', // Darker, richer navy
-              'vedha-purple': '#d946ef', // Neon Fuchsia/Purple
-              'vedha-blue': '#3b82f6', // Electric Blue
-              'vedha-silver': '#e2e8f0', // Premium Silver
+              'vedha-navy': '#030712',
+              'vedha-purple': '#d946ef',
+              'vedha-blue': '#3b82f6',
+              'vedha-silver': '#e2e8f0',
               'vedha-dark-glass': 'rgba(15, 23, 42, 0.6)',
               background: '#030712',
               foreground: '#e2e8f0',
@@ -120,7 +119,6 @@
         height: 2px;
         background: linear-gradient(90deg, transparent, #d946ef, #3b82f6, transparent);
       }
-      /* Custom Scrollbar */
       ::-webkit-scrollbar {
         width: 8px;
       }
@@ -134,36 +132,17 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #475569;
       }
-      /* Hide scrollbar for chrome/safari/opera */
       .scrollbar-hide::-webkit-scrollbar {
         display: none;
       }
-      /* Hide scrollbar for IE, Edge and Firefox */
       .scrollbar-hide {
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+        -ms-overflow-style: none;
+        scrollbar-width: none;
       }
     </style>
-  <script type="importmap">
-{
-  "imports": {
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
-    "react/": "https://aistudiocdn.com/react@^19.2.0/",
-    "react": "https://aistudiocdn.com/react@^19.2.0",
-    "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.13.1",
-    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
-    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.5.5",
-    "react-use-measure": "https://aistudiocdn.com/react-use-measure@^2.1.1",
-    "@radix-ui/react-slot": "https://aistudiocdn.com/@radix-ui/react-slot@^1.1.0",
-    "class-variance-authority": "https://aistudiocdn.com/class-variance-authority@^0.7.0"
-  }
-}
-</script>
-</head>
+  </head>
   <body>
     <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
