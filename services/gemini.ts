@@ -69,6 +69,36 @@ export const generateMissionInsight = async (): Promise<string> => {
     }
 }
 
+export const generateTimelineInsight = async (year: string, title: string): Promise<string> => {
+    const ai = getAIClient();
+    if (!ai) return `A defining moment in ${year} that solidified our commitment to technological excellence and national growth.`;
+
+    try {
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: `Provide a 2-sentence elaborated context for a corporate milestone: Year ${year}, Title "${title}". Professional and impressive tone.`,
+        });
+        return response.text.trim();
+    } catch (error) {
+        return `A defining moment in ${year} that solidified our commitment to technological excellence and national growth.`;
+    }
+}
+
+export const generateTestimonialSummary = async (client: string, review: string): Promise<string> => {
+  const ai = getAIClient();
+  if (!ai) return "A partnership that delivered exceptional value and scalability.";
+
+  try {
+      const response = await ai.models.generateContent({
+          model: 'gemini-2.5-flash',
+          contents: `Summarize this client review from ${client} into a single, punchy impact statement (max 12 words) highlighting the outcome. Review: "${review}"`,
+      });
+      return response.text.trim();
+  } catch (error) {
+      return "A partnership that delivered exceptional value and scalability.";
+  }
+}
+
 export const streamChatResponse = async function* (history: { role: string; parts: { text: string }[] }[], newMessage: string) {
   const ai = getAIClient();
   if (!ai) {

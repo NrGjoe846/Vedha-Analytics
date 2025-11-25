@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { generateTagline, generateTeamBio, generateMissionInsight } from '../services/gemini';
-import { TimelineEvent, TeamMember } from '../types';
-import { Target, Lightbulb, Users, Globe, ArrowRight, Activity, Award, Briefcase } from 'lucide-react';
+import { generateTagline, generateTeamBio, generateMissionInsight, generateTimelineInsight, generateTestimonialSummary } from '../services/gemini';
+import { TimelineEvent, TeamMember, Testimonial } from '../types';
+import { Target, Lightbulb, Users, Globe, ArrowRight, Activity, X, Loader2, Calendar, ChevronRight, MessageSquareQuote, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const timelineEvents: TimelineEvent[] = [
   { year: '2018', title: 'Foundation', description: 'Vedha Analytics was established with a vision to revolutionize Indian GovTech.' },
@@ -17,27 +18,139 @@ const teamMembers: TeamMember[] = [
   { id: '3', name: 'Vikram Singh', role: 'Head of GovTech', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400', socials: {} },
 ];
 
+const testimonials: Testimonial[] = [
+  { 
+    id: 't1', 
+    clientName: 'Rajiv Kumar', 
+    company: 'Smart City Mission', 
+    text: 'Vedha Analytics completely transformed our traffic management protocols. Their AI models reduced congestion by 30% within three months. An outstanding partner for government infrastructure.',
+    outcome: 'Reduced traffic congestion by 30%'
+  },
+  { 
+    id: 't2', 
+    clientName: 'Sarah Jenkins', 
+    company: 'Global Health Corp', 
+    text: 'The secure health record system developed by Vedha is state-of-the-art. It handles millions of records with zero latency and impeccable security compliance. A true engineering marvel.',
+    outcome: '100% data security & zero latency'
+  },
+  { 
+    id: 't3', 
+    clientName: 'Amit Desai', 
+    company: 'FinTech India', 
+    text: 'Their predictive analytics dashboard allowed us to foresee market trends with 90% accuracy. The team is professional, proactive, and technically superior.',
+    outcome: '90% prediction accuracy achieved'
+  }
+];
+
 const About: React.FC = () => {
   const [tagline, setTagline] = useState('Innovating India Through Technology');
   const [missionInsight, setMissionInsight] = useState('');
-  const [activeTeamBio, setActiveTeamBio] = useState<string | null>(null);
   const [bioContent, setBioContent] = useState<Record<string, string>>({});
+  
+  // Timeline State
+  const [selectedEvent, setSelectedEvent] = useState<TimelineEvent | null>(null);
+  const [timelineInsight, setTimelineInsight] = useState<string>('');
+  const [loadingTimeline, setLoadingTimeline] = useState(false);
+
+  // Testimonial State
+  const [testimonialSummaries, setTestimonialSummaries] = useState<Record<string, string>>({});
+
+  // Scroll State for Sticky CTA
+  const [showStickyCTA, setShowStickyCTA] = useState(false);
 
   useEffect(() => {
     generateTagline().then(setTagline);
     generateMissionInsight().then(setMissionInsight);
+
+    // Generate summaries for testimonials on load
+    testimonials.forEach(async (t) => {
+        const summary = await generateTestimonialSummary(t.company, t.text);
+        setTestimonialSummaries(prev => ({ ...prev, [t.id]: summary }));
+    });
+
+    const handleScroll = () => {
+      // Show sticky CTA after scrolling past 500px
+      if (window.scrollY > 500) {
+        setShowStickyCTA(true);
+      } else {
+        setShowStickyCTA(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleTeamHover = async (member: TeamMember) => {
-    setActiveTeamBio(member.id);
     if (!bioContent[member.id]) {
       const bio = await generateTeamBio(member.name, member.role);
       setBioContent(prev => ({ ...prev, [member.id]: bio }));
     }
   };
 
+  const handleTimelineClick = async (event: TimelineEvent) => {
+    setSelectedEvent(event);
+    setTimelineInsight('');
+    setLoadingTimeline(true);
+    const insight = await generateTimelineInsight(event.year, event.title);
+    setTimelineInsight(insight);
+    setLoadingTimeline(false);
+  };
+
   return (
-    <div className="w-full pt-20">
+    <div className="w-full pt-20 relative">
+      
+      {/* Sticky Bottom CTA */}
+      <div className={`fixed bottom-0 left-0 w-full z-40 transform transition-transform duration-500 ease-in-out ${showStickyCTA ? 'translate-y-0' : 'translate-y-full'}`}>
+        <div className="bg-[#030712]/90 backdrop-blur-xl border-t border-vedha-purple/30 p-4 shadow-[0_-5px_20px_rgba(217,70,239,0.1)]">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="text-center md:text-left">
+              <h3 className="text-white font-display font-bold text-lg">Ready to build the future?</h3>
+              <p className="text-gray-400 text-xs hidden md:block">Our consultants are ready to design your next AI breakthrough.</p>
+            </div>
+            <Link to="/contact" className="px-6 py-2.5 bg-gradient-to-r from-vedha-blue to-vedha-purple text-white font-bold text-sm rounded-full shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all flex items-center gap-2">
+              Request Consultation <ArrowRight size={14} />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Timeline Modal */}
+      {selectedEvent && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+          <div className="glass-panel w-full max-w-lg rounded-2xl p-8 relative border border-vedha-blue/50 shadow-[0_0_50px_rgba(59,130,246,0.2)]">
+            <button 
+              onClick={() => setSelectedEvent(null)}
+              className="absolute top-4 right-4 p-2 text-gray-400 hover:text-white rounded-full hover:bg-white/10 transition-colors"
+            >
+              <X size={20} />
+            </button>
+            
+            <div className="mb-2 inline-block px-3 py-1 rounded bg-vedha-blue/10 text-vedha-blue font-bold text-sm border border-vedha-blue/20">
+              {selectedEvent.year}
+            </div>
+            <h3 className="text-3xl font-display font-bold text-white mb-4">{selectedEvent.title}</h3>
+            <p className="text-gray-300 text-lg leading-relaxed mb-6">
+              {selectedEvent.description}
+            </p>
+            
+            <div className="pt-6 border-t border-white/10">
+              <h4 className="text-sm font-semibold text-vedha-purple uppercase tracking-wider mb-2 flex items-center gap-2">
+                <Activity size={14} /> AI Context
+              </h4>
+              {loadingTimeline ? (
+                <div className="flex items-center gap-2 text-gray-500 text-sm">
+                  <Loader2 className="animate-spin" size={14} /> Analyzing historical data...
+                </div>
+              ) : (
+                <p className="text-sm text-gray-400 italic">
+                  "{timelineInsight}"
+                </p>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
       <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[#030712]">
@@ -92,27 +205,55 @@ const About: React.FC = () => {
               <div className="text-center mb-16">
                   <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Our Journey</h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-purple mx-auto rounded-full"></div>
+                  <p className="mt-4 text-gray-500 text-sm">Tap on a milestone to view details</p>
               </div>
 
-              <div className="relative">
-                  {/* Vertical Line */}
+              {/* Desktop Vertical Layout */}
+              <div className="hidden md:block relative">
                   <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-vedha-blue via-vedha-purple to-transparent opacity-30"></div>
-
                   <div className="space-y-12">
                       {timelineEvents.map((event, index) => (
-                          <div key={index} className={`flex items-center justify-between w-full ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}>
+                          <div 
+                            key={index} 
+                            className={`flex items-center justify-between w-full cursor-pointer group ${index % 2 === 0 ? 'flex-row-reverse' : ''}`}
+                            onClick={() => handleTimelineClick(event)}
+                          >
                               <div className="w-5/12"></div>
-                              <div className="z-10 bg-[#030712] border-2 border-vedha-purple rounded-full p-2 shadow-[0_0_10px_rgba(217,70,239,0.5)]">
+                              <div className="z-10 bg-[#030712] border-2 border-vedha-purple rounded-full p-2 shadow-[0_0_10px_rgba(217,70,239,0.5)] group-hover:scale-125 transition-transform duration-300">
                                   <div className="w-3 h-3 bg-white rounded-full"></div>
                               </div>
-                              <div className="w-5/12 glass-panel p-6 rounded-xl border border-white/10 hover:border-vedha-blue/50 transition-all duration-300 group">
+                              <div className="w-5/12 glass-panel p-6 rounded-xl border border-white/10 group-hover:border-vedha-blue group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-300 transform group-hover:-translate-y-1">
                                   <span className="text-vedha-blue font-display font-bold text-xl block mb-2">{event.year}</span>
                                   <h3 className="text-white font-bold text-lg mb-2 group-hover:text-vedha-purple transition-colors">{event.title}</h3>
-                                  <p className="text-gray-400 text-sm">{event.description}</p>
+                                  <p className="text-gray-400 text-sm line-clamp-2">{event.description}</p>
+                                  <div className="mt-2 text-xs text-vedha-silver flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                    Read More <ChevronRight size={12} />
+                                  </div>
                               </div>
                           </div>
                       ))}
                   </div>
+              </div>
+
+              {/* Mobile Horizontal Swipe Layout */}
+              <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory space-x-4 pb-8 -mx-4 px-4 scrollbar-hide">
+                  {timelineEvents.map((event, index) => (
+                    <div 
+                      key={index} 
+                      onClick={() => handleTimelineClick(event)}
+                      className="snap-center shrink-0 w-[85vw] glass-panel p-6 rounded-xl border border-white/10 active:scale-95 transition-transform duration-200"
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="px-3 py-1 rounded-full bg-vedha-blue/10 text-vedha-blue font-bold text-sm border border-vedha-blue/20">{event.year}</span>
+                        <Calendar size={16} className="text-gray-500" />
+                      </div>
+                      <h3 className="text-white font-bold text-xl mb-2">{event.title}</h3>
+                      <p className="text-gray-400 text-sm line-clamp-3">{event.description}</p>
+                      <div className="mt-4 pt-4 border-t border-white/5 text-xs text-center text-vedha-purple font-medium uppercase tracking-wider">
+                        Tap for Details
+                      </div>
+                    </div>
+                  ))}
               </div>
           </div>
       </section>
@@ -164,20 +305,33 @@ const About: React.FC = () => {
                   {teamMembers.map((member) => (
                       <div 
                         key={member.id} 
-                        className="group relative h-[400px] rounded-2xl overflow-hidden cursor-pointer"
+                        className="group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent hover:border-vedha-purple hover:shadow-[0_0_30px_rgba(217,70,239,0.3)] transition-all duration-500"
                         onMouseEnter={() => handleTeamHover(member)}
                       >
-                          <img src={member.imageUrl} alt={member.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent opacity-90"></div>
+                          <img 
+                            src={member.imageUrl} 
+                            alt={member.name} 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/60 to-transparent opacity-90"></div>
                           
-                          <div className="absolute bottom-0 left-0 w-full p-6 transform transition-transform duration-300">
-                              <h3 className="text-xl font-bold text-white">{member.name}</h3>
-                              <p className="text-vedha-blue font-medium mb-2">{member.role}</p>
+                          <div className="absolute bottom-0 left-0 w-full p-6 transform transition-transform duration-500 group-hover:-translate-y-2">
+                              <div className="inline-block px-2 py-0.5 mb-2 rounded bg-vedha-blue/20 text-vedha-blue text-xs font-bold uppercase tracking-wider border border-vedha-blue/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Leadership
+                              </div>
+                              <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
+                              <p className="text-vedha-purple font-medium mb-3">{member.role}</p>
                               
-                              <div className="h-0 overflow-hidden group-hover:h-auto transition-all duration-500">
-                                  <p className="text-sm text-gray-300 mt-2 border-t border-white/20 pt-2">
-                                      {bioContent[member.id] || "Retrieving AI bio..."}
-                                  </p>
+                              <div className="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 overflow-hidden transition-all duration-700 ease-in-out">
+                                  <div className="pt-3 border-t border-white/20">
+                                    <p className="text-sm text-gray-200 leading-relaxed font-light transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                        {bioContent[member.id] || (
+                                          <span className="flex items-center gap-2 text-gray-400">
+                                            <Loader2 className="animate-spin w-3 h-3" /> AI generating bio...
+                                          </span>
+                                        )}
+                                    </p>
+                                  </div>
                               </div>
                           </div>
                       </div>
@@ -211,7 +365,7 @@ const About: React.FC = () => {
                               ))}
                           </div>
                       </div>
-                      <div className="relative h-64 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden">
+                      <div className="relative h-64 bg-white/5 rounded-xl border border-white/10 flex items-center justify-center overflow-hidden hover:border-vedha-blue/30 transition-colors">
                           {/* Map Visualization Placeholder */}
                           <div className="absolute inset-0 bg-[#020617]">
                               <div className="w-full h-full opacity-30" style={{backgroundImage: 'radial-gradient(circle, #3b82f6 1px, transparent 1px)', backgroundSize: '20px 20px'}}></div>
@@ -226,12 +380,66 @@ const About: React.FC = () => {
           </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 text-center">
+      {/* Testimonials Section */}
+      <section className="py-24 bg-[#02050c]">
+        <div className="max-w-7xl mx-auto px-4">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Client Success Stories</h2>
+                <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-purple mx-auto rounded-full"></div>
+            </div>
+
+            <div className="flex overflow-x-auto snap-x snap-mandatory space-x-6 pb-8 -mx-4 px-4 custom-scrollbar">
+                {testimonials.map((testimonial) => (
+                    <div key={testimonial.id} className="snap-center shrink-0 w-[90vw] md:w-[400px] glass-panel p-8 rounded-2xl border border-white/10 hover:border-vedha-purple/40 transition-all duration-300 relative group">
+                        <div className="absolute -top-4 -right-4 w-12 h-12 bg-vedha-blue/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <MessageSquareQuote className="w-6 h-6 text-vedha-blue" />
+                        </div>
+                        
+                        <div className="mb-6">
+                            <h4 className="text-xl font-bold text-white">{testimonial.company}</h4>
+                            <p className="text-sm text-gray-400">{testimonial.clientName}</p>
+                            <div className="flex gap-1 mt-2">
+                                {[1,2,3,4,5].map(star => <Star key={star} size={12} className="fill-vedha-purple text-vedha-purple" />)}
+                            </div>
+                        </div>
+
+                        <p className="text-gray-300 italic mb-6 leading-relaxed">"{testimonial.text}"</p>
+
+                        <div className="pt-4 border-t border-white/10">
+                             <div className="flex items-start gap-2">
+                                <Activity className="w-4 h-4 text-vedha-blue mt-0.5" />
+                                <div>
+                                    <span className="text-xs text-gray-500 uppercase tracking-wider block">AI Generated Impact Summary</span>
+                                    {testimonialSummaries[testimonial.id] ? (
+                                        <p className="text-vedha-blue font-semibold text-sm animate-fade-in">{testimonialSummaries[testimonial.id]}</p>
+                                    ) : (
+                                        <div className="h-4 w-32 bg-white/10 rounded animate-pulse mt-1"></div>
+                                    )}
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+            
+            {/* Logo Scroll (Simulated) */}
+            <div className="mt-16 pt-16 border-t border-white/5 relative overflow-hidden">
+                <div className="flex gap-16 justify-center opacity-40 animate-pulse-slow">
+                    {/* Placeholder Text Logos for now */}
+                    {['SmartCity', 'GovTech', 'FinServe', 'HealthPlus', 'InfraBuild'].map((logo, i) => (
+                        <span key={i} className="text-2xl font-display font-bold text-white uppercase tracking-widest">{logo}</span>
+                    ))}
+                </div>
+            </div>
+        </div>
+      </section>
+
+      {/* CTA Section (Original static CTA, kept for layout balance) */}
+      <section className="py-24 text-center pb-32">
           <h2 className="text-4xl font-display font-bold text-white mb-6">Ready to innovate with us?</h2>
-          <button className="px-10 py-4 bg-white text-[#030712] font-bold rounded-full hover:bg-gray-200 transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+          <Link to="/contact" className="inline-block px-10 py-4 bg-white text-[#030712] font-bold rounded-full hover:bg-gray-200 transition-all transform hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
               Partner With Vedha
-          </button>
+          </Link>
       </section>
     </div>
   );

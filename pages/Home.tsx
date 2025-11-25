@@ -3,6 +3,15 @@ import { generateTagline } from '../services/gemini';
 import { ArrowRight, Activity, ShieldCheck, Database, Code } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+// Add support for custom elements in React
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { url: string }, HTMLElement>;
+    }
+  }
+}
+
 const Home: React.FC = () => {
   const [tagline, setTagline] = useState<string>("Innovating India Through Technology");
   const [loadingTagline, setLoadingTagline] = useState(true);
@@ -19,46 +28,62 @@ const Home: React.FC = () => {
   return (
     <div className="w-full">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#030712]">
         {/* Background Elements */}
-        <div className="absolute inset-0 bg-[#030712]">
+        <div className="absolute inset-0">
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-vedha-blue/10 rounded-full blur-[128px] animate-pulse-slow"></div>
           <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-vedha-purple/10 rounded-full blur-[128px] animate-pulse-slow"></div>
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:32px_32px]"></div>
         </div>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up shadow-[0_0_15px_rgba(59,130,246,0.2)]">
-            Powered by Gemini 3 Intelligence
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-extrabold text-white mb-6 leading-tight tracking-tight">
-            Next-Gen <span className="text-transparent bg-clip-text bg-gradient-to-r from-vedha-blue to-vedha-purple">Digital</span> <br />
-            Transformation
-          </h1>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-10 w-full pt-20 md:pt-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            
+            {/* Text Content - Left Side */}
+            <div className="text-center md:text-left order-2 md:order-1">
+              <div className="inline-block mb-6 px-4 py-1.5 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up shadow-[0_0_15px_rgba(59,130,246,0.2)]">
+                Powered by Gemini 3 Intelligence
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-extrabold text-white mb-6 leading-tight tracking-tight">
+                Innovating India Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-vedha-blue to-vedha-purple">Technology, AI</span> & Software
+              </h1>
 
-          <div className="h-20 flex items-center justify-center mb-8">
-            {loadingTagline ? (
-               <div className="h-2 w-32 bg-white/10 rounded animate-pulse"></div>
-            ) : (
-              <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto animate-fade-in">
-                "{tagline}"
-              </p>
-            )}
-          </div>
+              <h2 className="text-lg md:text-xl text-gray-400 mb-8 font-light">
+                Premium Web, Software, AI & Government Solutions
+              </h2>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-            <Link to="/contact" className="px-8 py-4 bg-white text-[#030712] font-bold rounded-lg hover:bg-gray-200 transition-all transform hover:scale-105 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
-              Request Proposal <ArrowRight size={20} />
-            </Link>
-            <Link to="/about" className="px-8 py-4 glass-panel text-white font-medium rounded-lg hover:bg-white/10 hover:border-vedha-purple/50 transition-all flex items-center gap-2">
-              Our Vision
-            </Link>
+              <div className="h-16 flex items-center justify-center md:justify-start mb-8">
+                {loadingTagline ? (
+                   <div className="h-2 w-32 bg-white/10 rounded animate-pulse"></div>
+                ) : (
+                  <p className="text-lg text-vedha-silver font-medium italic animate-fade-in border-l-2 border-vedha-purple pl-4">
+                    "{tagline}"
+                  </p>
+                )}
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-6">
+                <Link to="/services" className="px-8 py-4 bg-white text-[#030712] font-bold rounded-lg hover:bg-gray-200 transition-all transform hover:scale-105 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+                  Explore Services <ArrowRight size={20} />
+                </Link>
+                <Link to="/contact" className="px-8 py-4 glass-panel text-white font-medium rounded-lg hover:bg-white/10 hover:border-vedha-purple/50 transition-all flex items-center gap-2">
+                  Request Consultation
+                </Link>
+              </div>
+            </div>
+
+            {/* Spline 3D Viewer - Right Side */}
+            <div className="order-1 md:order-2 h-[400px] md:h-[600px] w-full relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue/10 to-vedha-purple/10 rounded-full blur-3xl -z-10"></div>
+                <spline-viewer url="https://prod.spline.design/b1dfdf46-552e-43b8-b37c-f3cbbcf55f75/scene.splinecode" className="w-full h-full"></spline-viewer>
+            </div>
+
           </div>
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce hidden md:block">
           <div className="w-6 h-10 rounded-full border-2 border-gray-600 flex justify-center p-1">
              <div className="w-1 h-3 bg-vedha-purple rounded-full animate-scroll"></div>
           </div>

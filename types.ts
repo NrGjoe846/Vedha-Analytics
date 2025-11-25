@@ -45,3 +45,21 @@ export interface TeamMember {
     twitter?: string;
   }
 }
+
+export interface Testimonial {
+  id: string;
+  clientName: string;
+  company: string;
+  logoUrl?: string; // Placeholder for logo text/icon
+  text: string;
+  outcome: string;
+}
+
+// Add support for custom elements in React
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement> & { url: string }, HTMLElement>;
+    }
+  }
+}
