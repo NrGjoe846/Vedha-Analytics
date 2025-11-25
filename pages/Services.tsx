@@ -1,6 +1,8 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { Search, MousePointerClick, Share2, FileText, Mail, Layout, TrendingUp, ShieldAlert, ArrowRight } from 'lucide-react';
 import { ServiceItem } from '../types';
+import { LampContainer } from '../components/ui/lamp';
 
 const services: ServiceItem[] = [
   {
@@ -78,20 +80,38 @@ const Services: React.FC = () => {
   };
 
   return (
-    <div className="pt-24 pb-20 min-h-screen bg-[#030712]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h1 className="text-4xl md:text-6xl font-display font-bold text-white mb-6">Digital Excellence Services</h1>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto font-light">
-            Comprehensive digital solutions designed to elevate your brand authority and accelerate business growth.
-          </p>
-        </div>
+    <div className="min-h-screen bg-[#030712] overflow-x-hidden">
+      
+      {/* Lamp Hero Section */}
+      <LampContainer>
+        <motion.h1
+          initial={{ opacity: 0.5, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            delay: 0.3,
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+          className="mt-8 bg-gradient-to-br from-white to-gray-500 py-4 bg-clip-text text-center text-4xl font-display font-bold tracking-tight text-transparent md:text-7xl"
+        >
+          Digital Excellence <br /> Services
+        </motion.h1>
+        <motion.p
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           transition={{ delay: 0.5, duration: 0.8 }}
+           className="mt-4 text-gray-400 text-center max-w-2xl font-light text-lg px-4"
+        >
+           Comprehensive digital solutions designed to elevate your brand authority and accelerate business growth.
+        </motion.p>
+      </LampContainer>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 -mt-32 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, idx) => (
-            <div key={service.id} className="glass-panel rounded-2xl p-8 hover:bg-white/5 transition-all duration-300 group border border-white/5 hover:border-vedha-purple/50 relative overflow-hidden flex flex-col h-full hover:shadow-[0_0_30px_rgba(59,130,246,0.15)]">
+            <div key={service.id} className="glass-panel rounded-2xl p-8 transition-all duration-500 group border border-white/5 relative overflow-hidden flex flex-col h-full bg-[#030712]/80 backdrop-blur-xl hover:-translate-y-2 hover:shadow-[0_0_40px_rgba(59,130,246,0.2)] hover:border-vedha-blue/40">
               {/* Background Glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-vedha-blue/10 rounded-full blur-2xl transform translate-x-10 -translate-y-10 group-hover:bg-vedha-purple/20 transition-colors duration-500"></div>
+              <div className="absolute top-0 right-0 w-32 h-32 bg-vedha-blue/10 rounded-full blur-3xl transform translate-x-10 -translate-y-10 group-hover:bg-vedha-purple/20 transition-colors duration-500"></div>
 
               <div className="mb-6 p-3 bg-white/5 rounded-lg w-fit group-hover:scale-110 transition-transform duration-300 group-hover:bg-vedha-blue/20 group-hover:text-vedha-blue">
                 {getIcon(service.icon)}
@@ -105,7 +125,7 @@ const Services: React.FC = () => {
               <div className="space-y-3 mb-8">
                 {service.features.map((feature, idx) => (
                   <div key={idx} className="flex items-start text-xs text-gray-500 group-hover:text-gray-400 transition-colors">
-                    <div className="min-w-[4px] h-[4px] rounded-full bg-vedha-purple mt-1.5 mr-2"></div>
+                    <div className="min-w-[4px] h-[4px] rounded-full bg-vedha-purple mt-1.5 mr-2 group-hover:bg-vedha-blue transition-colors"></div>
                     {feature}
                   </div>
                 ))}
@@ -113,7 +133,7 @@ const Services: React.FC = () => {
 
               <div className="mt-auto pt-6 border-t border-white/10 flex justify-between items-center">
                 <span className="text-[10px] text-gray-500 uppercase tracking-widest font-semibold">Premium</span>
-                <button className="text-vedha-blue group-hover:text-vedha-purple text-xs font-bold uppercase tracking-wider transition-colors flex items-center gap-1 group-hover:gap-2">
+                <button className="text-vedha-blue group-hover:text-vedha-purple text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1 group-hover:gap-2 group-hover:translate-x-1">
                   Explore <ArrowRight size={12} />
                 </button>
               </div>

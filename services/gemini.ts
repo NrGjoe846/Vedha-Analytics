@@ -13,7 +13,7 @@ export const generateTagline = async (): Promise<string> => {
 
   try {
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
+      model: 'gemini-3-pro-preview',
       contents: "Generate a short, punchy, futuristic tagline (under 10 words) for 'Vedha Analytics', a premium Indian IT and Government AI consultancy. Focus on 'Future', 'Intelligence', and 'Impact'. Do not include quotes.",
     });
     return response.text.trim();

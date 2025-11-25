@@ -22,11 +22,35 @@
               'vedha-blue': '#3b82f6', // Electric Blue
               'vedha-silver': '#e2e8f0', // Premium Silver
               'vedha-dark-glass': 'rgba(15, 23, 42, 0.6)',
+              background: '#030712',
+              foreground: '#e2e8f0',
+              primary: {
+                DEFAULT: '#3b82f6',
+                foreground: '#ffffff',
+              },
+              secondary: {
+                DEFAULT: '#d946ef',
+                foreground: '#ffffff',
+              },
+              muted: {
+                DEFAULT: 'rgba(255,255,255,0.1)',
+                foreground: '#94a3b8',
+              },
+              accent: {
+                DEFAULT: 'rgba(255,255,255,0.05)',
+                foreground: '#ffffff',
+              },
+            },
+            backgroundImage: {
+              'gradient-conic': 'conic-gradient(var(--tw-gradient-stops))',
             },
             animation: {
               'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'float': 'float 6s ease-in-out infinite',
               'glow': 'glow 3s ease-in-out infinite alternate',
+              'scroll': 'scroll 30s linear infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
             },
             keyframes: {
               float: {
@@ -36,6 +60,18 @@
               glow: {
                 '0%': { boxShadow: '0 0 5px rgba(217, 70, 239, 0.2)' },
                 '100%': { boxShadow: '0 0 20px rgba(217, 70, 239, 0.6), 0 0 10px rgba(59, 130, 246, 0.4)' }
+              },
+              scroll: {
+                '0%': { transform: 'translateX(0)' },
+                '100%': { transform: 'translateX(-50%)' },
+              },
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
               }
             }
           },
@@ -98,6 +134,15 @@
       ::-webkit-scrollbar-thumb:hover {
         background: #475569;
       }
+      /* Hide scrollbar for chrome/safari/opera */
+      .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      .scrollbar-hide {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+      }
     </style>
   <script type="importmap">
 {
@@ -107,7 +152,13 @@
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react-router-dom": "https://aistudiocdn.com/react-router-dom@^7.9.6",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0"
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^11.13.1",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^2.5.5",
+    "react-use-measure": "https://aistudiocdn.com/react-use-measure@^2.1.1",
+    "@radix-ui/react-slot": "https://aistudiocdn.com/@radix-ui/react-slot@^1.1.0",
+    "class-variance-authority": "https://aistudiocdn.com/class-variance-authority@^0.7.0"
   }
 }
 </script>

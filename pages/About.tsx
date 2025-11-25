@@ -42,6 +42,8 @@ const testimonials: Testimonial[] = [
   }
 ];
 
+const clientLogos = ['SmartCity Mission', 'GovTech India', 'Ministry of IT', 'FinServe Global', 'HealthPlus', 'InfraBuild', 'Digital India', 'CyberSecure'];
+
 const About: React.FC = () => {
   const [tagline, setTagline] = useState('Innovating India Through Technology');
   const [missionInsight, setMissionInsight] = useState('');
@@ -302,29 +304,37 @@ const About: React.FC = () => {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {teamMembers.map((member) => (
+                  {teamMembers.map((member, index) => (
                       <div 
                         key={member.id} 
-                        className="group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent hover:border-vedha-purple hover:shadow-[0_0_30px_rgba(217,70,239,0.3)] transition-all duration-500"
+                        className={`group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent transition-all duration-500 ${
+                            index % 2 === 0 
+                                ? 'hover:border-vedha-blue hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]' 
+                                : 'hover:border-vedha-purple hover:shadow-[0_0_30px_rgba(217,70,239,0.3)]'
+                        }`}
                         onMouseEnter={() => handleTeamHover(member)}
                       >
                           <img 
                             src={member.imageUrl} 
                             alt={member.name} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0" 
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0" 
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/60 to-transparent opacity-90"></div>
                           
                           <div className="absolute bottom-0 left-0 w-full p-6 transform transition-transform duration-500 group-hover:-translate-y-2">
-                              <div className="inline-block px-2 py-0.5 mb-2 rounded bg-vedha-blue/20 text-vedha-blue text-xs font-bold uppercase tracking-wider border border-vedha-blue/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className={`inline-block px-2 py-0.5 mb-2 rounded text-xs font-bold uppercase tracking-wider border opacity-0 group-hover:opacity-100 transition-opacity ${
+                                index % 2 === 0 
+                                    ? 'bg-vedha-blue/20 text-vedha-blue border-vedha-blue/30' 
+                                    : 'bg-vedha-purple/20 text-vedha-purple border-vedha-purple/30'
+                              }`}>
                                 Leadership
                               </div>
                               <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
-                              <p className="text-vedha-purple font-medium mb-3">{member.role}</p>
+                              <p className={`font-medium mb-3 ${index % 2 === 0 ? 'text-vedha-blue' : 'text-vedha-purple'}`}>{member.role}</p>
                               
                               <div className="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 overflow-hidden transition-all duration-700 ease-in-out">
                                   <div className="pt-3 border-t border-white/20">
-                                    <p className="text-sm text-gray-200 leading-relaxed font-light transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <p className="text-sm text-gray-200 leading-relaxed font-light transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 animate-fade-in-up">
                                         {bioContent[member.id] || (
                                           <span className="flex items-center gap-2 text-gray-400">
                                             <Loader2 className="animate-spin w-3 h-3" /> AI generating bio...
@@ -380,8 +390,8 @@ const About: React.FC = () => {
           </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="py-24 bg-[#02050c]">
+      {/* Testimonials Section with Logo Marquee */}
+      <section className="py-24 bg-[#02050c] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Client Success Stories</h2>
@@ -422,13 +432,25 @@ const About: React.FC = () => {
                 ))}
             </div>
             
-            {/* Logo Scroll (Simulated) */}
-            <div className="mt-16 pt-16 border-t border-white/5 relative overflow-hidden">
-                <div className="flex gap-16 justify-center opacity-40 animate-pulse-slow">
-                    {/* Placeholder Text Logos for now */}
-                    {['SmartCity', 'GovTech', 'FinServe', 'HealthPlus', 'InfraBuild'].map((logo, i) => (
-                        <span key={i} className="text-2xl font-display font-bold text-white uppercase tracking-widest">{logo}</span>
-                    ))}
+            {/* Infinite Logo Marquee */}
+            <div className="mt-20 pt-10 border-t border-white/5 relative w-full">
+                {/* Gradient Masks */}
+                <div className="absolute top-0 left-0 w-24 md:w-48 h-full bg-gradient-to-r from-[#02050c] to-transparent z-10 pointer-events-none"></div>
+                <div className="absolute top-0 right-0 w-24 md:w-48 h-full bg-gradient-to-l from-[#02050c] to-transparent z-10 pointer-events-none"></div>
+                
+                <p className="text-center text-xs font-semibold text-gray-500 uppercase tracking-[0.2em] mb-10">Trusted By Industry Leaders</p>
+
+                <div className="flex w-full overflow-hidden group">
+                    <div className="flex gap-16 animate-scroll whitespace-nowrap hover:[animation-play-state:paused] py-4">
+                        {/* Tripling the list to ensure smooth seamless loop on wider screens */}
+                        {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, i) => (
+                            <div key={i} className="flex-shrink-0 flex items-center justify-center">
+                                <span className="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-gray-500 to-gray-700 hover:from-vedha-blue hover:to-vedha-purple transition-all duration-300 uppercase tracking-widest cursor-default transform hover:scale-110">
+                                    {logo}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             </div>
         </div>

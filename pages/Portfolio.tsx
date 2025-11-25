@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { generateProjectInsight } from '../services/gemini';
 import { ProjectItem } from '../types';
 import { Loader2 } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const projects: ProjectItem[] = [
   {
@@ -70,10 +71,10 @@ const Portfolio: React.FC = () => {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300 transform ${
                   activeFilter === filter
-                    ? 'bg-vedha-blue text-white shadow-[0_0_15px_rgba(59,130,246,0.4)]'
-                    : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5'
+                    ? 'bg-vedha-blue text-white shadow-[0_0_15px_rgba(59,130,246,0.4)] scale-105'
+                    : 'bg-white/5 text-gray-400 hover:text-white hover:bg-white/10 border border-white/5 hover:border-vedha-blue/30'
                 }`}
               >
                 {filter}
@@ -82,66 +83,79 @@ const Portfolio: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="group relative rounded-xl overflow-hidden glass-panel border border-white/10 hover:border-vedha-purple/50 transition-all duration-500">
-              {/* Image */}
-              <div className="h-72 overflow-hidden relative">
-                <img 
-                  src={project.imageUrl} 
-                  alt={project.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent opacity-90"></div>
-                <div className="absolute top-4 left-4">
-                  <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded border border-white/10 text-xs font-bold text-vedha-blue uppercase tracking-wider">
-                    {project.category}
-                  </span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8 relative -mt-10">
-                <h3 className="text-2xl font-bold font-display text-white mb-2">{project.title}</h3>
-                <p className="text-gray-400 mb-6 font-light">{project.summary}</p>
-                
-                <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-4">
-                  <div>
-                    <span className="text-xs text-gray-500 uppercase tracking-wider block mb-1">Impact</span>
-                    <p className="text-vedha-purple font-semibold">{project.impact}</p>
+        <motion.div 
+          layout
+          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+        >
+          <AnimatePresence>
+            {filteredProjects.map((project) => (
+              <motion.div 
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+                key={project.id} 
+                className="group relative rounded-xl overflow-hidden glass-panel border border-white/10 hover:border-vedha-purple/50 transition-all duration-500"
+              >
+                {/* Image */}
+                <div className="h-72 overflow-hidden relative">
+                  <img 
+                    src={project.imageUrl} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/40 to-transparent opacity-90"></div>
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 bg-black/60 backdrop-blur-md rounded border border-white/10 text-xs font-bold text-vedha-blue uppercase tracking-wider">
+                      {project.category}
+                    </span>
                   </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-8 relative -mt-10">
+                  <h3 className="text-2xl font-bold font-display text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-400 mb-6 font-light">{project.summary}</p>
                   
-                  {/* AI Interaction */}
-                  <div className="text-right">
-                    {!aiInsights[project.id] && !loadingInsight && (
-                      <button 
-                        onClick={() => handleGenerateInsight(project)}
-                        className="text-xs flex items-center gap-2 text-white hover:text-vedha-blue transition-colors px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10"
-                      >
-                        <span className="w-1.5 h-1.5 rounded-full bg-vedha-blue animate-pulse"></span>
-                        Generate AI Insight
-                      </button>
-                    )}
-                    {loadingInsight === project.id && (
-                      <span className="text-xs text-gray-500 flex items-center gap-2">
-                        <Loader2 className="h-3 w-3 animate-spin" /> Analyzing...
-                      </span>
-                    )}
+                  <div className="flex items-center justify-between border-t border-white/10 pt-4 mt-4">
+                    <div>
+                      <span className="text-xs text-gray-500 uppercase tracking-wider block mb-1">Impact</span>
+                      <p className="text-vedha-purple font-semibold">{project.impact}</p>
+                    </div>
+                    
+                    {/* AI Interaction */}
+                    <div className="text-right">
+                      {!aiInsights[project.id] && !loadingInsight && (
+                        <button 
+                          onClick={() => handleGenerateInsight(project)}
+                          className="text-xs flex items-center gap-2 text-white hover:text-vedha-blue transition-colors px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-vedha-blue animate-pulse"></span>
+                          Generate AI Insight
+                        </button>
+                      )}
+                      {loadingInsight === project.id && (
+                        <span className="text-xs text-gray-500 flex items-center gap-2">
+                          <Loader2 className="h-3 w-3 animate-spin" /> Analyzing...
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
 
-                {/* AI Generated Insight Box */}
-                {aiInsights[project.id] && (
-                  <div className="mt-4 p-4 bg-gradient-to-r from-vedha-blue/10 to-transparent border-l-2 border-vedha-blue rounded-r-lg animate-fade-in">
-                    <p className="text-xs text-gray-300 italic">
-                      " {aiInsights[project.id]} "
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
-        </div>
+                  {/* AI Generated Insight Box */}
+                  {aiInsights[project.id] && (
+                    <div className="mt-4 p-4 bg-gradient-to-r from-vedha-blue/10 to-transparent border-l-2 border-vedha-blue rounded-r-lg animate-fade-in">
+                      <p className="text-xs text-gray-300 italic">
+                        " {aiInsights[project.id]} "
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
