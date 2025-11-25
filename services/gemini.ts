@@ -14,7 +14,7 @@ export const generateTagline = async (visitorType: 'Corporate' | 'Government' | 
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
-      contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Vedha Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
+      contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Veth Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
     });
     return response.text.trim();
   } catch (error) {
@@ -37,6 +37,21 @@ export const generateProjectInsight = async (projectTitle: string, category: str
     console.error("Gemini insight error:", error);
     return "Advanced analytics and digital transformation delivered.";
   }
+};
+
+export const generatePoliticalInsight = async (serviceTitle: string): Promise<string> => {
+    const ai = getAIClient();
+    if (!ai) return "Leveraging data to decode voter intent and optimize campaign resources.";
+
+    try {
+        const response = await ai.models.generateContent({
+            model: 'gemini-2.5-flash',
+            contents: `Write a concise, high-impact strategic insight (max 15 words) about the value of "${serviceTitle}" in modern Indian elections. Professional, analytical tone.`,
+        });
+        return response.text.trim();
+    } catch (error) {
+        return "Leveraging data to decode voter intent and optimize campaign resources.";
+    }
 };
 
 export const generateTeamBio = async (name: string, role: string): Promise<string> => {
@@ -110,7 +125,7 @@ export const streamChatResponse = async function* (history: { role: string; part
     const chat = ai.chats.create({
       model: 'gemini-3-pro-preview',
       config: {
-        systemInstruction: "You are 'Vedha AI', the advanced assistant for Vedha Analytics. You are professional, concise, and knowledgeable about IT, Government projects, and AI. Tone: Premium, helpful, futuristic.",
+        systemInstruction: "You are 'Veth AI', the advanced assistant for Veth Analytics. You are professional, concise, and knowledgeable about IT, Government projects, and AI. Tone: Premium, helpful, futuristic.",
       },
       history: history,
     });

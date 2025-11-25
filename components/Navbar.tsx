@@ -9,8 +9,8 @@ const Navbar: React.FC = () => {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Political', path: '/projects' },
-    { name: 'Services', path: '/services' },
+    { name: 'Political Services', path: '/projects' },
+    { name: 'Tech Services', path: '/services' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
                 <Triangle className="h-6 w-6 text-vedha-silver fill-vedha-purple stroke-vedha-blue group-hover:rotate-180 transition-transform duration-700" />
             </div>
             <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-vedha-blue group-hover:to-vedha-purple transition-all duration-300">
-              VEDHA<span className="text-vedha-blue">ANALYTICS</span>
+              VETH<span className="text-vedha-blue">ANALYTICS</span>
             </span>
           </Link>
 
