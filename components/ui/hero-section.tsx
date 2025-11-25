@@ -2,17 +2,23 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './button'
 import { InfiniteSlider } from './infinite-slider'
-import { ProgressiveBlur } from './progressive-blur'
 import { cn } from '../../lib/utils'
 import { generateTagline } from '../../services/gemini'
 
 export function HeroSection() {
     const [tagline, setTagline] = useState<string>("Premium IT, AI & Government Solutions");
     const [isLoadingTagline, setIsLoadingTagline] = useState(true);
+    const [visitorContext, setVisitorContext] = useState<string>('Government');
 
     useEffect(() => {
         const fetchTagline = async () => {
-            const result = await generateTagline();
+            // Simulate visitor type detection (random for demo purposes)
+            // In a real app, this could come from user behavior or external data
+            const types = ['Corporate', 'Government', 'Startup'] as const;
+            const detectedType = types[Math.floor(Math.random() * types.length)];
+            setVisitorContext(detectedType);
+
+            const result = await generateTagline(detectedType);
             setTagline(result);
             setIsLoadingTagline(false);
         };
@@ -25,8 +31,9 @@ export function HeroSection() {
                 <div className="pb-24 pt-24 md:pb-32 lg:pb-56 lg:pt-32">
                     <div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:block">
                         <div className="mx-auto max-w-lg text-center lg:ml-0 lg:w-1/2 lg:text-left z-20 relative">
-                            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up">
-                                Gemini 3 Powered Intelligence
+                            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up flex items-center gap-2 w-fit mx-auto lg:mx-0">
+                                <span className="w-2 h-2 rounded-full bg-vedha-blue animate-pulse"></span>
+                                Gemini 3 Powered • {visitorContext} Mode
                             </div>
                             <h1 className="mt-4 max-w-2xl text-balance text-4xl font-display font-bold md:text-6xl lg:mt-6 xl:text-7xl">
                                 Innovating India Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-vedha-blue to-vedha-purple">Technology & AI</span>
@@ -34,7 +41,10 @@ export function HeroSection() {
                             
                             <div className="mt-8 h-20">
                                 {isLoadingTagline ? (
-                                    <div className="h-6 w-3/4 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
+                                    <div className="space-y-2">
+                                        <div className="h-4 w-3/4 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
+                                        <div className="h-4 w-1/2 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
+                                    </div>
                                 ) : (
                                     <p className="max-w-2xl text-pretty text-lg text-gray-400 italic border-l-2 border-vedha-purple pl-4">
                                         "{tagline}"

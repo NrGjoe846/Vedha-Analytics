@@ -7,14 +7,14 @@ const getAIClient = () => {
   return new GoogleGenAI({ apiKey });
 };
 
-export const generateTagline = async (): Promise<string> => {
+export const generateTagline = async (visitorType: 'Corporate' | 'Government' | 'Startup' = 'Government'): Promise<string> => {
   const ai = getAIClient();
   if (!ai) return "Innovating India Through Technology";
 
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
-      contents: "Generate a short, punchy, futuristic tagline (under 10 words) for 'Vedha Analytics', a premium Indian IT and Government AI consultancy. Focus on 'Future', 'Intelligence', and 'Impact'. Do not include quotes.",
+      contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Vedha Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
     });
     return response.text.trim();
   } catch (error) {

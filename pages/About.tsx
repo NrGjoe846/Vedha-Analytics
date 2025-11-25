@@ -1,43 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { generateTagline, generateTeamBio, generateMissionInsight, generateTimelineInsight, generateTestimonialSummary } from '../services/gemini';
 import { TimelineEvent, TeamMember, Testimonial } from '../types';
-import { Target, Lightbulb, Users, Globe, ArrowRight, Activity, X, Loader2, Calendar, ChevronRight, MessageSquareQuote, Star } from 'lucide-react';
+import { Target, Lightbulb, Users, Globe, ArrowRight, Activity, X, Loader2, Calendar, ChevronRight, MessageSquareQuote, Star, BarChart3, Fingerprint, BrainCircuit, Map } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const timelineEvents: TimelineEvent[] = [
-  { year: '2018', title: 'Foundation', description: 'Vedha Analytics was established with a vision to revolutionize Indian GovTech.' },
-  { year: '2020', title: 'First Gov Project', description: 'Successfully deployed a traffic management AI for a Tier-1 Smart City.' },
-  { year: '2022', title: 'AI Research Lab', description: 'Launched dedicated R&D wing for generative AI models tailored for Indic languages.' },
+  { year: '2018', title: 'Foundation', description: 'Vedha Analytics was established with a vision to revolutionize Indian GovTech and Political Strategy.' },
+  { year: '2020', title: 'First Major Campaign', description: 'Successfully managed data analytics for a state-level election, optimizing voter outreach.' },
+  { year: '2022', title: 'AI Research Lab', description: 'Launched dedicated R&D wing for generative AI models tailored for Indic languages and sentiment analysis.' },
   { year: '2023', title: 'National Recognition', description: 'Awarded "Top GovTech Startup" by Ministry of Electronics & IT.' },
   { year: '2024', title: 'Global Expansion', description: 'Started operations in SEA region with specialized efficient-compute models.' },
 ];
 
 const teamMembers: TeamMember[] = [
-  { id: '1', name: 'Arjun Mehta', role: 'CEO & Founder', imageUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400', socials: {} },
-  { id: '2', name: 'Dr. Priya Rao', role: 'Chief AI Scientist', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400', socials: {} },
-  { id: '3', name: 'Vikram Singh', role: 'Head of GovTech', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400', socials: {} },
+  { id: '1', name: 'Arjun Mehta', role: 'CEO & Lead Strategist', imageUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=400', socials: {} },
+  { id: '2', name: 'Dr. Priya Rao', role: 'Chief Data Scientist', imageUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400', socials: {} },
+  { id: '3', name: 'Vikram Singh', role: 'Head of Field Intelligence', imageUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400', socials: {} },
 ];
 
 const testimonials: Testimonial[] = [
   { 
     id: 't1', 
     clientName: 'Rajiv Kumar', 
-    company: 'Smart City Mission', 
-    text: 'Vedha Analytics completely transformed our traffic management protocols. Their AI models reduced congestion by 30% within three months. An outstanding partner for government infrastructure.',
-    outcome: 'Reduced traffic congestion by 30%'
+    company: 'State Election Commission', 
+    text: 'Vedha Analytics completely transformed our voter engagement protocols. Their AI models improved outreach efficiency by 30% within three months.',
+    outcome: 'Optimized voter engagement by 30%'
   },
   { 
     id: 't2', 
     clientName: 'Sarah Jenkins', 
-    company: 'Global Health Corp', 
-    text: 'The secure health record system developed by Vedha is state-of-the-art. It handles millions of records with zero latency and impeccable security compliance. A true engineering marvel.',
-    outcome: '100% data security & zero latency'
+    company: 'Global Policy Institute', 
+    text: 'The secure data systems developed by Vedha are state-of-the-art. It handles millions of records with zero latency and impeccable security compliance.',
+    outcome: '100% data security & compliance'
   },
   { 
     id: 't3', 
     clientName: 'Amit Desai', 
-    company: 'FinTech India', 
-    text: 'Their predictive analytics dashboard allowed us to foresee market trends with 90% accuracy. The team is professional, proactive, and technically superior.',
+    company: 'National Party HQ', 
+    text: 'Their predictive analytics dashboard allowed us to foresee constituency trends with 90% accuracy. The team is professional, proactive, and technically superior.',
     outcome: '90% prediction accuracy achieved'
   }
 ];
@@ -106,8 +106,8 @@ const About: React.FC = () => {
         <div className="bg-[#030712]/90 backdrop-blur-xl border-t border-vedha-purple/30 p-4 shadow-[0_-5px_20px_rgba(217,70,239,0.1)]">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
-              <h3 className="text-white font-display font-bold text-lg">Ready to build the future?</h3>
-              <p className="text-gray-400 text-xs hidden md:block">Our consultants are ready to design your next AI breakthrough.</p>
+              <h3 className="text-white font-display font-bold text-lg">Ready to decode the future?</h3>
+              <p className="text-gray-400 text-xs hidden md:block">Our strategists are ready to design your next campaign breakthrough.</p>
             </div>
             <Link to="/contact" className="px-6 py-2.5 bg-gradient-to-r from-vedha-blue to-vedha-purple text-white font-bold text-sm rounded-full shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all flex items-center gap-2">
               Request Consultation <ArrowRight size={14} />
@@ -154,7 +154,7 @@ const About: React.FC = () => {
       )}
 
       {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden border-b border-white/5">
         <div className="absolute inset-0 bg-[#030712]">
            {/* Abstract Neon Grid Background */}
            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
@@ -165,17 +165,17 @@ const About: React.FC = () => {
         <div className="relative z-10 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
                 <div className="inline-block px-4 py-1 rounded-full border border-vedha-purple/30 bg-vedha-purple/10 text-vedha-purple text-xs font-bold uppercase tracking-wider animate-pulse-slow">
-                    About Vedha Analytics
+                    Political Intelligence & Strategy
                 </div>
                 <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight">
-                    Engineering <span className="neon-gradient-text">The Future</span>
+                    Decoding <span className="neon-gradient-text">Democracy</span>
                 </h1>
                 <p className="text-xl text-gray-400 font-light max-w-lg">
-                    "{tagline}"
+                    Transforming ground realities into actionable intelligence for leaders of tomorrow.
                 </p>
                 <div className="flex flex-wrap gap-4 pt-4">
                     <button className="px-8 py-3 bg-vedha-blue text-white font-semibold rounded-lg hover:bg-blue-600 transition-all shadow-[0_0_20px_rgba(59,130,246,0.3)]">
-                        Explore Our Vision
+                        Explore Strategy
                     </button>
                     <button className="px-8 py-3 glass-panel text-white font-semibold rounded-lg hover:bg-white/10 transition-all">
                         Meet The Team
@@ -199,6 +199,43 @@ const About: React.FC = () => {
                 </div>
             </div>
         </div>
+      </section>
+
+      {/* NEW MAIN BLOCK: Who We Are */}
+      <section className="py-20 bg-[#02050c] relative">
+         <div className="max-w-5xl mx-auto px-6">
+            <div className="glass-panel p-8 md:p-14 rounded-3xl border border-vedha-blue/20 shadow-[0_0_60px_rgba(59,130,246,0.15)] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-vedha-blue/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
+                
+                <h2 className="text-sm font-bold text-vedha-blue uppercase tracking-widest mb-6 flex items-center gap-3">
+                   <span className="w-10 h-0.5 bg-vedha-blue"></span> Who We Are
+                </h2>
+                
+                <p className="text-xl md:text-2xl text-white leading-relaxed font-light mb-8">
+                    <span className="font-semibold text-vedha-purple">Vedha Analytics Pvt. Ltd.</span> is a next-generation political analytics and strategy company built to decode voter behaviour, analyse ground realities, and provide data-driven solutions for political parties, leaders, and public-policy organisations.
+                </p>
+                
+                <p className="text-lg text-gray-400 leading-relaxed font-light">
+                    We combine <span className="text-white font-medium">technology, field intelligence, data science, and human insight</span> to deliver actionable strategies that create real electoral impact.
+                </p>
+
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/10">
+                   {[
+                      { icon: <BrainCircuit className="w-6 h-6 text-vedha-blue" />, label: "Technology" },
+                      { icon: <Map className="w-6 h-6 text-vedha-purple" />, label: "Field Intel" },
+                      { icon: <BarChart3 className="w-6 h-6 text-pink-500" />, label: "Data Science" },
+                      { icon: <Fingerprint className="w-6 h-6 text-cyan-400" />, label: "Human Insight" }
+                   ].map((item, idx) => (
+                      <div key={idx} className="flex flex-col items-center text-center gap-3 group">
+                         <div className="p-3 bg-white/5 rounded-xl group-hover:bg-white/10 transition-colors">
+                            {item.icon}
+                         </div>
+                         <span className="text-sm font-medium text-gray-300 group-hover:text-white transition-colors">{item.label}</span>
+                      </div>
+                   ))}
+                </div>
+            </div>
+         </div>
       </section>
 
       {/* Timeline Section */}
