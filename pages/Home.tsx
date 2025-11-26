@@ -2,17 +2,6 @@ import React from 'react';
 import { HeroSection } from '../components/ui/hero-section';
 import { Activity, ShieldCheck, Database, Code } from 'lucide-react';
 
-// Add support for custom elements in React
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'spline-viewer': React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement> & {
-        url?: string;
-      };
-    }
-  }
-}
-
 const Home: React.FC = () => {
   return (
     <div className="w-full">

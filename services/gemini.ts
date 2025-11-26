@@ -16,7 +16,7 @@ export const generateTagline = async (visitorType: 'Corporate' | 'Government' | 
       model: 'gemini-3-pro-preview',
       contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Veth Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
     });
-    return response.text.trim();
+    return response.text?.trim() || "Innovating India Through Technology";
   } catch (error) {
     console.error("Gemini tagline error:", error);
     return "Innovating India Through Technology";
@@ -32,7 +32,7 @@ export const generateProjectInsight = async (projectTitle: string, category: str
       model: 'gemini-2.5-flash',
       contents: `Write a single sentence (max 20 words) describing the high-tech impact of a ${category} project titled "${projectTitle}". Use business-centric, futuristic language.`,
     });
-    return response.text.trim();
+    return response.text?.trim() || "Advanced analytics and digital transformation delivered.";
   } catch (error) {
     console.error("Gemini insight error:", error);
     return "Advanced analytics and digital transformation delivered.";
@@ -48,7 +48,7 @@ export const generatePoliticalInsight = async (serviceTitle: string): Promise<st
             model: 'gemini-2.5-flash',
             contents: `Write a concise, high-impact strategic insight (max 15 words) about the value of "${serviceTitle}" in modern Indian elections. Professional, analytical tone.`,
         });
-        return response.text.trim();
+        return response.text?.trim() || "Leveraging data to decode voter intent and optimize campaign resources.";
     } catch (error) {
         return "Leveraging data to decode voter intent and optimize campaign resources.";
     }
@@ -63,7 +63,7 @@ export const generateTeamBio = async (name: string, role: string): Promise<strin
             model: 'gemini-2.5-flash',
             contents: `Write a professional, premium 2-sentence bio for ${name}, the ${role} at a high-end AI consultancy. Emphasize expertise and leadership.`,
         });
-        return response.text.trim();
+        return response.text?.trim() || `${name} is a visionary leader in ${role} with over a decade of experience driving digital transformation.`;
     } catch (error) {
         return `${name} is a visionary leader in ${role} with over a decade of experience driving digital transformation.`;
     }
@@ -78,7 +78,7 @@ export const generateMissionInsight = async (): Promise<string> => {
             model: 'gemini-2.5-flash',
             contents: "Generate a single visionary sentence about the future of AI in governance and society. Abstract and inspiring.",
         });
-        return response.text.trim();
+        return response.text?.trim() || "Empowering society through sustainable and scalable artificial intelligence solutions.";
     } catch (error) {
         return "Empowering society through sustainable and scalable artificial intelligence solutions.";
     }
@@ -93,7 +93,7 @@ export const generateTimelineInsight = async (year: string, title: string): Prom
             model: 'gemini-2.5-flash',
             contents: `Provide a 2-sentence elaborated context for a corporate milestone: Year ${year}, Title "${title}". Professional and impressive tone.`,
         });
-        return response.text.trim();
+        return response.text?.trim() || `A defining moment in ${year} that solidified our commitment to technological excellence and national growth.`;
     } catch (error) {
         return `A defining moment in ${year} that solidified our commitment to technological excellence and national growth.`;
     }
@@ -108,7 +108,7 @@ export const generateTestimonialSummary = async (client: string, review: string)
           model: 'gemini-2.5-flash',
           contents: `Summarize this client review from ${client} into a single, punchy impact statement (max 12 words) highlighting the outcome. Review: "${review}"`,
       });
-      return response.text.trim();
+      return response.text?.trim() || "A partnership that delivered exceptional value and scalability.";
   } catch (error) {
       return "A partnership that delivered exceptional value and scalability.";
   }
@@ -133,7 +133,9 @@ export const streamChatResponse = async function* (history: { role: string; part
     const result = await chat.sendMessageStream({ message: newMessage });
 
     for await (const chunk of result) {
-        yield chunk.text;
+        if (chunk.text) {
+            yield chunk.text;
+        }
     }
   } catch (error) {
     console.error("Chat error:", error);
