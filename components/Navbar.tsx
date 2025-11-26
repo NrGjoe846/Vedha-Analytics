@@ -22,10 +22,10 @@ const Navbar: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3 group">
             <div className="relative p-2">
-                <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue to-vedha-purple opacity-20 group-hover:opacity-40 blur-lg rounded-full transition-opacity"></div>
-                <Triangle className="h-6 w-6 text-vedha-silver fill-vedha-purple stroke-vedha-blue group-hover:rotate-180 transition-transform duration-700" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue to-vedha-red opacity-20 group-hover:opacity-40 blur-lg rounded-full transition-opacity"></div>
+                <Triangle className="h-6 w-6 text-vedha-silver fill-vedha-red stroke-vedha-blue group-hover:rotate-180 transition-transform duration-700" />
             </div>
-            <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-vedha-blue group-hover:to-vedha-purple transition-all duration-300">
+            <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-vedha-blue group-hover:to-vedha-red transition-all duration-300">
               VETH<span className="text-vedha-blue">ANALYTICS</span>
             </span>
           </Link>
@@ -45,11 +45,11 @@ const Navbar: React.FC = () => {
                 >
                   {link.name}
                   {isActive(link.path) && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-vedha-blue to-vedha-purple shadow-[0_0_10px_rgba(217,70,239,0.5)]"></span>
+                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-vedha-blue to-vedha-red shadow-[0_0_10px_rgba(239,68,68,0.5)]"></span>
                   )}
                 </Link>
               ))}
-              <Link to="/contact" className="ml-4 bg-gradient-to-r from-vedha-blue/80 to-vedha-purple/80 hover:from-vedha-blue hover:to-vedha-purple text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(217,70,239,0.5)] transform hover:-translate-y-0.5">
+              <Link to="/contact" className="ml-4 bg-gradient-to-r from-vedha-blue/80 to-vedha-red/80 hover:from-vedha-blue hover:to-vedha-red text-white px-6 py-2 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(59,130,246,0.3)] hover:shadow-[0_0_25px_rgba(239,68,68,0.5)] transform hover:-translate-y-0.5">
                 Get Proposal
               </Link>
             </div>
@@ -77,7 +77,7 @@ const Navbar: React.FC = () => {
                 to={link.path}
                 onClick={() => setIsOpen(false)}
                 className={`block px-3 py-2 rounded-md text-base font-medium ${
-                    isActive(link.path) ? 'text-vedha-purple bg-white/5' : 'text-gray-300 hover:text-white hover:bg-white/5'
+                    isActive(link.path) ? 'text-vedha-red bg-white/5' : 'text-gray-300 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {link.name}

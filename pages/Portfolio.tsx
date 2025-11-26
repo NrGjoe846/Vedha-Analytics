@@ -5,6 +5,8 @@ import { ImpactCounter } from '../components/ui/impact-counter';
 import { LampContainer } from '../components/ui/lamp';
 import { motion } from 'framer-motion';
 
+const MotionDiv = motion.div as any;
+
 const Portfolio: React.FC = () => {
   const [formState, setFormState] = useState({ name: '', phone: '', email: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -58,13 +60,13 @@ const Portfolio: React.FC = () => {
       
       {/* 1. HERO SECTION */}
       <LampContainer className="min-h-[60vh] md:min-h-[70vh]">
-        <motion.div
+        <MotionDiv
             initial={{ opacity: 0.5, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8, ease: "easeInOut" }}
             className="text-center"
         >
-            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-purple/30 bg-vedha-purple/10 text-vedha-purple text-xs font-bold tracking-widest uppercase animate-pulse-slow">
+            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-red/30 bg-vedha-red/10 text-vedha-red text-xs font-bold tracking-widest uppercase animate-pulse-slow">
                 Veth Analytics Pvt. Ltd.
             </div>
             <h1 className="mt-2 bg-gradient-to-br from-white to-gray-400 py-4 bg-clip-text text-4xl md:text-7xl font-display font-bold tracking-tight text-transparent">
@@ -81,7 +83,7 @@ const Portfolio: React.FC = () => {
                     Book Consultation
                 </a>
             </div>
-        </motion.div>
+        </MotionDiv>
       </LampContainer>
 
       {/* 2. SERVICES MATRIX */}
@@ -89,7 +91,7 @@ const Portfolio: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-16">
                 <h2 className="text-3xl font-display font-bold text-white mb-4">Core Strategic Pillars</h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-purple rounded-full"></div>
+                <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-red rounded-full"></div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -138,26 +140,26 @@ const Portfolio: React.FC = () => {
                 </div>
 
                 {/* Veth Way */}
-                <div className="p-8 rounded-3xl border border-vedha-blue/30 bg-gradient-to-br from-vedha-blue/5 to-vedha-purple/5 relative overflow-hidden">
+                <div className="p-8 rounded-3xl border border-vedha-blue/30 bg-gradient-to-br from-vedha-blue/5 to-vedha-red/5 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-vedha-blue/10 rounded-full blur-3xl"></div>
                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
                         <CheckCircle2 className="text-vedha-blue" /> Veth Intelligence
                     </h3>
                     <ul className="space-y-4 text-gray-300">
                         <li className="flex gap-3">
-                            <CheckCircle2 size={16} className="text-vedha-purple mt-1 shrink-0" />
+                            <CheckCircle2 size={16} className="text-vedha-red mt-1 shrink-0" />
                             <span><strong>Accuracy-first approach</strong> combining data + field reality</span>
                         </li>
                         <li className="flex gap-3">
-                            <CheckCircle2 size={16} className="text-vedha-purple mt-1 shrink-0" />
+                            <CheckCircle2 size={16} className="text-vedha-red mt-1 shrink-0" />
                             <span><strong>Confidential</strong> & high-trust intelligence systems</span>
                         </li>
                         <li className="flex gap-3">
-                            <CheckCircle2 size={16} className="text-vedha-purple mt-1 shrink-0" />
+                            <CheckCircle2 size={16} className="text-vedha-red mt-1 shrink-0" />
                             <span><strong>Real-time</strong> reporting & fast feedback loops</span>
                         </li>
                         <li className="flex gap-3">
-                            <CheckCircle2 size={16} className="text-vedha-purple mt-1 shrink-0" />
+                            <CheckCircle2 size={16} className="text-vedha-red mt-1 shrink-0" />
                             <span><strong>Micro-targeted</strong> narrative setting</span>
                         </li>
                     </ul>
@@ -206,7 +208,7 @@ const Portfolio: React.FC = () => {
                         />
                         <button 
                             type="submit" 
-                            className="w-full bg-gradient-to-r from-vedha-blue to-vedha-purple text-white font-bold text-lg py-5 rounded-xl hover:shadow-[0_0_30px_rgba(217,70,239,0.4)] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3"
+                            className="w-full bg-gradient-to-r from-vedha-blue to-vedha-red text-white font-bold text-lg py-5 rounded-xl hover:shadow-[0_0_30px_rgba(239,68,68,0.4)] transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3"
                         >
                             Request Briefing <Send size={20} />
                         </button>

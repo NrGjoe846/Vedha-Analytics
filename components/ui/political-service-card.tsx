@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown, ArrowRight, Loader2, Info } from 'lucide-react';
 import { generatePoliticalInsight } from '../../services/gemini';
 
+const MotionDiv = motion.div as any;
+
 interface ServiceProps {
   id: string;
   title: string;
@@ -26,9 +28,9 @@ export const PoliticalServiceCard: React.FC<ServiceProps> = ({ id, title, subSer
   };
 
   return (
-    <motion.div 
+    <MotionDiv 
       layout
-      className={`glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 ${isExpanded ? 'bg-white/5 border-vedha-blue/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]' : 'hover:border-vedha-purple/30'}`}
+      className={`glass-panel rounded-2xl overflow-hidden border border-white/10 transition-all duration-500 ${isExpanded ? 'bg-white/5 border-vedha-blue/50 shadow-[0_0_30px_rgba(59,130,246,0.15)]' : 'hover:border-vedha-red/30'}`}
     >
       <div 
         onClick={handleExpand}
@@ -42,17 +44,17 @@ export const PoliticalServiceCard: React.FC<ServiceProps> = ({ id, title, subSer
             {title}
           </h3>
         </div>
-        <motion.div
+        <MotionDiv
           animate={{ rotate: isExpanded ? 180 : 0 }}
           transition={{ duration: 0.3 }}
         >
           <ChevronDown className={`w-5 h-5 ${isExpanded ? 'text-vedha-blue' : 'text-gray-500'}`} />
-        </motion.div>
+        </MotionDiv>
       </div>
 
       <AnimatePresence>
         {isExpanded && (
-          <motion.div
+          <MotionDiv
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
@@ -74,15 +76,15 @@ export const PoliticalServiceCard: React.FC<ServiceProps> = ({ id, title, subSer
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 {subServices.map((sub, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors p-2 rounded hover:bg-white/5">
-                    <ArrowRight className="w-3 h-3 text-vedha-purple" />
+                    <ArrowRight className="w-3 h-3 text-vedha-red" />
                     {sub}
                   </div>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </MotionDiv>
         )}
       </AnimatePresence>
-    </motion.div>
+    </MotionDiv>
   );
 };

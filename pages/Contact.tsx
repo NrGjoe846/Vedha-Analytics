@@ -24,7 +24,7 @@ const Contact: React.FC = () => {
     <div className="pt-24 pb-20 min-h-screen relative overflow-hidden bg-[#030712]">
         {/* Decorative BG */}
         <div className="absolute top-1/2 left-0 w-80 h-80 bg-vedha-blue/10 rounded-full blur-[100px]"></div>
-        <div className="absolute bottom-0 right-0 w-80 h-80 bg-vedha-purple/10 rounded-full blur-[100px]"></div>
+        <div className="absolute bottom-0 right-0 w-80 h-80 bg-vedha-red/10 rounded-full blur-[100px]"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -50,7 +50,7 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="flex items-start space-x-6">
-                <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-vedha-purple">
+                <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-vedha-red">
                   <Mail className="h-6 w-6" />
                 </div>
                 <div>
@@ -136,7 +136,7 @@ const Contact: React.FC = () => {
                 </div>
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-vedha-blue to-vedha-purple text-white font-bold py-4 rounded-lg transition-all transform hover:translate-y-[-2px] shadow-[0_0_20px_rgba(217,70,239,0.3)] flex justify-center items-center gap-2"
+                  className="w-full bg-gradient-to-r from-vedha-blue to-vedha-red text-white font-bold py-4 rounded-lg transition-all transform hover:translate-y-[-2px] shadow-[0_0_20px_rgba(239,68,68,0.3)] flex justify-center items-center gap-2"
                 >
                   <Send size={18} /> Send Inquiry
                 </button>

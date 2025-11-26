@@ -36,7 +36,7 @@ export const ImpactCounter: React.FC<CounterProps> = ({ value, suffix = '', labe
 
   return (
     <div ref={ref} className="text-center p-6 glass-panel rounded-2xl border border-white/5 hover:border-vedha-blue/30 transition-all group">
-      <div className="text-4xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 group-hover:from-vedha-blue group-hover:to-vedha-purple transition-all mb-2">
+      <div className="text-4xl md:text-5xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-gray-400 group-hover:from-vedha-blue group-hover:to-vedha-red transition-all mb-2">
         {count}{suffix}
       </div>
       <div className="text-sm text-gray-500 uppercase tracking-widest font-semibold">{label}</div>

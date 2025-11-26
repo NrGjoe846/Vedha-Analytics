@@ -103,13 +103,13 @@ const About: React.FC = () => {
       
       {/* Sticky Bottom CTA */}
       <div className={`fixed bottom-0 left-0 w-full z-40 transform transition-transform duration-500 ease-in-out ${showStickyCTA ? 'translate-y-0' : 'translate-y-full'}`}>
-        <div className="bg-[#030712]/90 backdrop-blur-xl border-t border-vedha-purple/30 p-4 shadow-[0_-5px_20px_rgba(217,70,239,0.1)]">
+        <div className="bg-[#030712]/90 backdrop-blur-xl border-t border-vedha-red/30 p-4 shadow-[0_-5px_20px_rgba(239,68,68,0.1)]">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
             <div className="text-center md:text-left">
               <h3 className="text-white font-display font-bold text-lg">Ready to decode the future?</h3>
               <p className="text-gray-400 text-xs hidden md:block">Our strategists are ready to design your next campaign breakthrough.</p>
             </div>
-            <Link to="/contact" className="px-6 py-2.5 bg-gradient-to-r from-vedha-blue to-vedha-purple text-white font-bold text-sm rounded-full shadow-[0_0_15px_rgba(217,70,239,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all flex items-center gap-2">
+            <Link to="/contact" className="px-6 py-2.5 bg-gradient-to-r from-vedha-blue to-vedha-red text-white font-bold text-sm rounded-full shadow-[0_0_15px_rgba(239,68,68,0.3)] hover:shadow-[0_0_25px_rgba(59,130,246,0.5)] transition-all flex items-center gap-2">
               Request Consultation <ArrowRight size={14} />
             </Link>
           </div>
@@ -136,7 +136,7 @@ const About: React.FC = () => {
             </p>
             
             <div className="pt-6 border-t border-white/10">
-              <h4 className="text-sm font-semibold text-vedha-purple uppercase tracking-wider mb-2 flex items-center gap-2">
+              <h4 className="text-sm font-semibold text-vedha-red uppercase tracking-wider mb-2 flex items-center gap-2">
                 <Activity size={14} /> AI Context
               </h4>
               {loadingTimeline ? (
@@ -158,13 +158,13 @@ const About: React.FC = () => {
         <div className="absolute inset-0 bg-[#030712]">
            {/* Abstract Neon Grid Background */}
            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
-           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-vedha-purple/10 to-transparent"></div>
+           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-vedha-red/10 to-transparent"></div>
            <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-tr from-vedha-blue/10 to-transparent blur-3xl"></div>
         </div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-6">
-                <div className="inline-block px-4 py-1 rounded-full border border-vedha-purple/30 bg-vedha-purple/10 text-vedha-purple text-xs font-bold uppercase tracking-wider animate-pulse-slow">
+                <div className="inline-block px-4 py-1 rounded-full border border-vedha-red/30 bg-vedha-red/10 text-vedha-red text-xs font-bold uppercase tracking-wider animate-pulse-slow">
                     Political Intelligence & Strategy
                 </div>
                 <h1 className="text-5xl md:text-7xl font-display font-bold text-white leading-tight">
@@ -185,12 +185,12 @@ const About: React.FC = () => {
 
             {/* 3D Visual Placeholder */}
             <div className="h-[400px] w-full relative">
-                <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue/20 to-vedha-purple/20 rounded-2xl blur-xl animate-pulse-slow"></div>
+                <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue/20 to-vedha-red/20 rounded-2xl blur-xl animate-pulse-slow"></div>
                 <div className="relative h-full w-full glass-panel rounded-2xl overflow-hidden border border-white/10 flex items-center justify-center">
                     {/* Placeholder for Spline - CSS representation */}
                     <div className="relative w-48 h-48 animate-float">
                         <div className="absolute inset-0 border-4 border-vedha-blue rounded-full opacity-50 animate-[spin_10s_linear_infinite]"></div>
-                        <div className="absolute inset-4 border-4 border-vedha-purple rounded-full opacity-50 animate-[spin_15s_linear_infinite_reverse]"></div>
+                        <div className="absolute inset-4 border-4 border-vedha-red rounded-full opacity-50 animate-[spin_15s_linear_infinite_reverse]"></div>
                         <div className="absolute inset-8 border-4 border-white rounded-full opacity-20 animate-[spin_20s_linear_infinite]"></div>
                         <div className="absolute inset-0 flex items-center justify-center">
                             <Activity className="w-16 h-16 text-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)]" />
@@ -212,7 +212,7 @@ const About: React.FC = () => {
                 </h2>
                 
                 <p className="text-xl md:text-2xl text-white leading-relaxed font-light mb-8">
-                    <span className="font-semibold text-vedha-purple">Vedha Analytics Pvt. Ltd.</span> is a next-generation political analytics and strategy company built to decode voter behaviour, analyse ground realities, and provide data-driven solutions for political parties, leaders, and public-policy organisations.
+                    <span className="font-semibold text-vedha-red">Vedha Analytics Pvt. Ltd.</span> is a next-generation political analytics and strategy company built to decode voter behaviour, analyse ground realities, and provide data-driven solutions for political parties, leaders, and public-policy organisations.
                 </p>
                 
                 <p className="text-lg text-gray-400 leading-relaxed font-light">
@@ -222,7 +222,7 @@ const About: React.FC = () => {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 pt-10 border-t border-white/10">
                    {[
                       { icon: <BrainCircuit className="w-6 h-6 text-vedha-blue" />, label: "Technology" },
-                      { icon: <Map className="w-6 h-6 text-vedha-purple" />, label: "Field Intel" },
+                      { icon: <Map className="w-6 h-6 text-vedha-red" />, label: "Field Intel" },
                       { icon: <BarChart3 className="w-6 h-6 text-pink-500" />, label: "Data Science" },
                       { icon: <Fingerprint className="w-6 h-6 text-cyan-400" />, label: "Human Insight" }
                    ].map((item, idx) => (
@@ -243,13 +243,13 @@ const About: React.FC = () => {
           <div className="max-w-6xl mx-auto px-4">
               <div className="text-center mb-16">
                   <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Our Journey</h2>
-                  <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-purple mx-auto rounded-full"></div>
+                  <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-red mx-auto rounded-full"></div>
                   <p className="mt-4 text-gray-500 text-sm">Tap on a milestone to view details</p>
               </div>
 
               {/* Desktop Vertical Layout */}
               <div className="hidden md:block relative">
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-vedha-blue via-vedha-purple to-transparent opacity-30"></div>
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-vedha-blue via-vedha-red to-transparent opacity-30"></div>
                   <div className="space-y-12">
                       {timelineEvents.map((event, index) => (
                           <div 
@@ -258,12 +258,12 @@ const About: React.FC = () => {
                             onClick={() => handleTimelineClick(event)}
                           >
                               <div className="w-5/12"></div>
-                              <div className="z-10 bg-[#030712] border-2 border-vedha-purple rounded-full p-2 shadow-[0_0_10px_rgba(217,70,239,0.5)] group-hover:scale-125 transition-transform duration-300">
+                              <div className="z-10 bg-[#030712] border-2 border-vedha-red rounded-full p-2 shadow-[0_0_10px_rgba(239,68,68,0.5)] group-hover:scale-125 transition-transform duration-300">
                                   <div className="w-3 h-3 bg-white rounded-full"></div>
                               </div>
                               <div className="w-5/12 glass-panel p-6 rounded-xl border border-white/10 group-hover:border-vedha-blue group-hover:shadow-[0_0_20px_rgba(59,130,246,0.2)] transition-all duration-300 transform group-hover:-translate-y-1">
                                   <span className="text-vedha-blue font-display font-bold text-xl block mb-2">{event.year}</span>
-                                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-vedha-purple transition-colors">{event.title}</h3>
+                                  <h3 className="text-white font-bold text-lg mb-2 group-hover:text-vedha-red transition-colors">{event.title}</h3>
                                   <p className="text-gray-400 text-sm line-clamp-2">{event.description}</p>
                                   <div className="mt-2 text-xs text-vedha-silver flex items-center opacity-0 group-hover:opacity-100 transition-opacity">
                                     Read More <ChevronRight size={12} />
@@ -288,7 +288,7 @@ const About: React.FC = () => {
                       </div>
                       <h3 className="text-white font-bold text-xl mb-2">{event.title}</h3>
                       <p className="text-gray-400 text-sm line-clamp-3">{event.description}</p>
-                      <div className="mt-4 pt-4 border-t border-white/5 text-xs text-center text-vedha-purple font-medium uppercase tracking-wider">
+                      <div className="mt-4 pt-4 border-t border-white/5 text-xs text-center text-vedha-red font-medium uppercase tracking-wider">
                         Tap for Details
                       </div>
                     </div>
@@ -312,17 +312,17 @@ const About: React.FC = () => {
                       </p>
                   </div>
 
-                  <div className="glass-panel p-10 rounded-2xl border-l-4 border-vedha-purple hover:translate-y-[-5px] transition-transform">
-                      <div className="w-12 h-12 bg-vedha-purple/20 rounded-lg flex items-center justify-center mb-6">
-                          <Lightbulb className="w-6 h-6 text-vedha-purple" />
+                  <div className="glass-panel p-10 rounded-2xl border-l-4 border-vedha-red hover:translate-y-[-5px] transition-transform">
+                      <div className="w-12 h-12 bg-vedha-red/20 rounded-lg flex items-center justify-center mb-6">
+                          <Lightbulb className="w-6 h-6 text-vedha-red" />
                       </div>
                       <h3 className="text-2xl font-display font-bold text-white mb-4">Our Vision</h3>
                       <p className="text-gray-400 leading-relaxed mb-4">
                           To be the global benchmark for responsible AI and digital governance.
                       </p>
                       {missionInsight && (
-                          <div className="mt-4 p-4 bg-white/5 rounded-lg border border-vedha-purple/20">
-                              <p className="text-xs text-vedha-purple italic flex gap-2">
+                          <div className="mt-4 p-4 bg-white/5 rounded-lg border border-vedha-red/20">
+                              <p className="text-xs text-vedha-red italic flex gap-2">
                                   <span className="font-bold">AI Insight:</span> "{missionInsight}"
                               </p>
                           </div>
@@ -347,7 +347,7 @@ const About: React.FC = () => {
                         className={`group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent transition-all duration-500 ${
                             index % 2 === 0 
                                 ? 'hover:border-vedha-blue hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]' 
-                                : 'hover:border-vedha-purple hover:shadow-[0_0_30px_rgba(217,70,239,0.3)]'
+                                : 'hover:border-vedha-red hover:shadow-[0_0_30px_rgba(239,68,68,0.3)]'
                         }`}
                         onMouseEnter={() => handleTeamHover(member)}
                       >
@@ -362,12 +362,12 @@ const About: React.FC = () => {
                               <div className={`inline-block px-2 py-0.5 mb-2 rounded text-xs font-bold uppercase tracking-wider border opacity-0 group-hover:opacity-100 transition-opacity ${
                                 index % 2 === 0 
                                     ? 'bg-vedha-blue/20 text-vedha-blue border-vedha-blue/30' 
-                                    : 'bg-vedha-purple/20 text-vedha-purple border-vedha-purple/30'
+                                    : 'bg-vedha-red/20 text-vedha-red border-vedha-red/30'
                               }`}>
                                 Leadership
                               </div>
                               <h3 className="text-2xl font-bold text-white mb-1">{member.name}</h3>
-                              <p className={`font-medium mb-3 ${index % 2 === 0 ? 'text-vedha-blue' : 'text-vedha-purple'}`}>{member.role}</p>
+                              <p className={`font-medium mb-3 ${index % 2 === 0 ? 'text-vedha-blue' : 'text-vedha-red'}`}>{member.role}</p>
                               
                               <div className="max-h-0 opacity-0 group-hover:max-h-[200px] group-hover:opacity-100 overflow-hidden transition-all duration-700 ease-in-out">
                                   <div className="pt-3 border-t border-white/20">
@@ -391,7 +391,7 @@ const About: React.FC = () => {
       <section className="py-20 border-t border-white/5 bg-[#030712]">
           <div className="max-w-7xl mx-auto px-4">
               <div className="glass-panel rounded-3xl p-12 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-96 h-96 bg-vedha-purple/10 rounded-full blur-[100px] pointer-events-none"></div>
+                  <div className="absolute top-0 right-0 w-96 h-96 bg-vedha-red/10 rounded-full blur-[100px] pointer-events-none"></div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
                       <div>
@@ -406,7 +406,7 @@ const About: React.FC = () => {
                                   { label: 'Pro-bono Hours', val: '500+' },
                               ].map((stat, i) => (
                                   <div key={i}>
-                                      <div className="text-2xl font-bold text-vedha-purple mb-1">{stat.val}</div>
+                                      <div className="text-2xl font-bold text-vedha-red mb-1">{stat.val}</div>
                                       <div className="text-xs text-gray-500 uppercase tracking-wide">{stat.label}</div>
                                   </div>
                               ))}
@@ -432,12 +432,12 @@ const About: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4">
             <div className="text-center mb-16">
                 <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">Client Success Stories</h2>
-                <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-purple mx-auto rounded-full"></div>
+                <div className="w-24 h-1 bg-gradient-to-r from-vedha-blue to-vedha-red mx-auto rounded-full"></div>
             </div>
 
             <div className="flex overflow-x-auto snap-x snap-mandatory space-x-6 pb-8 -mx-4 px-4 custom-scrollbar">
                 {testimonials.map((testimonial) => (
-                    <div key={testimonial.id} className="snap-center shrink-0 w-[90vw] md:w-[400px] glass-panel p-8 rounded-2xl border border-white/10 hover:border-vedha-purple/40 transition-all duration-300 relative group">
+                    <div key={testimonial.id} className="snap-center shrink-0 w-[90vw] md:w-[400px] glass-panel p-8 rounded-2xl border border-white/10 hover:border-vedha-red/40 transition-all duration-300 relative group">
                         <div className="absolute -top-4 -right-4 w-12 h-12 bg-vedha-blue/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                             <MessageSquareQuote className="w-6 h-6 text-vedha-blue" />
                         </div>
@@ -446,7 +446,7 @@ const About: React.FC = () => {
                             <h4 className="text-xl font-bold text-white">{testimonial.company}</h4>
                             <p className="text-sm text-gray-400">{testimonial.clientName}</p>
                             <div className="flex gap-1 mt-2">
-                                {[1,2,3,4,5].map(star => <Star key={star} size={12} className="fill-vedha-purple text-vedha-purple" />)}
+                                {[1,2,3,4,5].map(star => <Star key={star} size={12} className="fill-vedha-red text-vedha-red" />)}
                             </div>
                         </div>
 
@@ -482,7 +482,7 @@ const About: React.FC = () => {
                         {/* Tripling the list to ensure smooth seamless loop on wider screens */}
                         {[...clientLogos, ...clientLogos, ...clientLogos].map((logo, i) => (
                             <div key={i} className="flex-shrink-0 flex items-center justify-center">
-                                <span className="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-gray-500 to-gray-700 hover:from-vedha-blue hover:to-vedha-purple transition-all duration-300 uppercase tracking-widest cursor-default transform hover:scale-110">
+                                <span className="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-br from-gray-500 to-gray-700 hover:from-vedha-blue hover:to-vedha-red transition-all duration-300 uppercase tracking-widest cursor-default transform hover:scale-110">
                                     {logo}
                                 </span>
                             </div>

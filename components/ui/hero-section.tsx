@@ -1,7 +1,9 @@
+
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from './button'
 import { InfiniteSlider } from './infinite-slider'
+import RotatingText from './rotating-text'
 import { cn } from '../../lib/utils'
 import { generateTagline } from '../../services/gemini'
 
@@ -35,8 +37,20 @@ export function HeroSection() {
                                 <span className="w-2 h-2 rounded-full bg-vedha-blue animate-pulse"></span>
                                 Gemini 3 Powered • {visitorContext} Mode
                             </div>
-                            <h1 className="mt-4 max-w-2xl text-balance text-4xl font-display font-bold md:text-6xl lg:mt-6 xl:text-7xl">
-                                Innovating India Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-vedha-blue to-vedha-purple">Technology & AI</span>
+                            <h1 className="mt-4 max-w-2xl text-balance text-4xl font-display font-bold md:text-6xl lg:mt-6 xl:text-7xl flex flex-col gap-2">
+                                Innovating India Through
+                                <RotatingText
+                                    texts={['Technology', 'AI Solutions', 'Data Science', 'Governance']}
+                                    mainClassName="px-2 sm:px-2 md:px-3 bg-gradient-to-r from-vedha-blue to-vedha-red text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg w-fit mx-auto lg:mx-0"
+                                    staggerFrom={"last"}
+                                    initial={{ y: "100%" }}
+                                    animate={{ y: 0 }}
+                                    exit={{ y: "-120%" }}
+                                    staggerDuration={0.025}
+                                    splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                                    transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                                    rotationInterval={3000}
+                                />
                             </h1>
                             
                             <div className="mt-8 h-20">
@@ -46,7 +60,7 @@ export function HeroSection() {
                                         <div className="h-4 w-1/2 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
                                     </div>
                                 ) : (
-                                    <p className="max-w-2xl text-pretty text-lg text-gray-400 italic border-l-2 border-vedha-purple pl-4">
+                                    <p className="max-w-2xl text-pretty text-lg text-gray-400 italic border-l-2 border-vedha-red pl-4">
                                         "{tagline}"
                                     </p>
                                 )}
@@ -75,12 +89,6 @@ export function HeroSection() {
                         
                         {/* Hero Image / Graphic */}
                         <div className="pointer-events-none mt-12 lg:absolute lg:inset-0 lg:-right-20 lg:-top-20 lg:mt-0 lg:h-full lg:w-2/3 lg:object-contain z-10 opacity-80 mix-blend-lighten">
-                             {/* Abstract Tech Graphic */}
-                             <img
-                                className="w-full h-full object-cover lg:object-right mask-image-gradient"
-                                src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2070&auto=format&fit=crop" 
-                                alt="Abstract Technology"
-                             />
                              <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/50 to-transparent"></div>
                              <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
                         </div>
