@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { Button } from './button'
 import { InfiniteSlider } from './infinite-slider'
 import RotatingText from './rotating-text'
+import { AnimatedBackground, GradientOrbs, GridPattern } from './animated-background'
+import { Skeleton } from './skeleton'
 import { cn } from '../../lib/utils'
 import { generateTagline } from '../../services/gemini'
 
@@ -14,8 +16,6 @@ export function HeroSection() {
 
     useEffect(() => {
         const fetchTagline = async () => {
-            // Simulate visitor type detection (random for demo purposes)
-            // In a real app, this could come from user behavior or external data
             const types = ['Corporate', 'Government', 'Startup'] as const;
             const detectedType = types[Math.floor(Math.random() * types.length)];
             setVisitorContext(detectedType);
@@ -28,13 +28,18 @@ export function HeroSection() {
     }, []);
 
     return (
-        <main className="overflow-x-hidden relative bg-[#030712] text-white">
-            <section>
-                <div className="pb-24 pt-24 md:pb-32 lg:pb-56 lg:pt-32">
+        <section className="overflow-x-hidden relative bg-[#030712] text-white" aria-label="Hero section">
+            <div className="relative">
+                <AnimatedBackground />
+                <GradientOrbs />
+                <GridPattern />
+
+                <div className="relative z-10 pb-24 pt-24 md:pb-32 lg:pb-56 lg:pt-32">
                     <div className="relative mx-auto flex max-w-7xl flex-col px-6 lg:block">
                         <div className="mx-auto max-w-lg text-center lg:ml-0 lg:w-1/2 lg:text-left z-20 relative">
-                            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up flex items-center gap-2 w-fit mx-auto lg:mx-0">
-                                <span className="w-2 h-2 rounded-full bg-vedha-blue animate-pulse"></span>
+                            <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-blue/30 bg-vedha-blue/10 text-vedha-blue text-xs font-bold tracking-widest uppercase animate-fade-in-up flex items-center gap-2 w-fit mx-auto lg:mx-0" role="status" aria-live="polite">
+                                <span className="w-2 h-2 rounded-full bg-vedha-blue animate-pulse" aria-hidden="true"></span>
+                                <span className="sr-only">AI Powered</span>
                                 Gemini 3 Powered • {visitorContext} Mode
                             </div>
                             <h1 className="mt-4 max-w-2xl text-balance text-4xl font-display font-bold md:text-6xl lg:mt-6 xl:text-7xl flex flex-col gap-2">
@@ -52,25 +57,25 @@ export function HeroSection() {
                                     rotationInterval={3000}
                                 />
                             </h1>
-                            
-                            <div className="mt-8 h-20">
+
+                            <div className="mt-8 min-h-[5rem]" role="status" aria-live="polite" aria-label="AI generated tagline">
                                 {isLoadingTagline ? (
-                                    <div className="space-y-2">
-                                        <div className="h-4 w-3/4 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
-                                        <div className="h-4 w-1/2 bg-white/10 rounded animate-pulse mx-auto lg:mx-0"></div>
+                                    <div className="space-y-2" aria-label="Loading tagline">
+                                        <Skeleton className="h-4 w-3/4 mx-auto lg:mx-0" animation="wave" />
+                                        <Skeleton className="h-4 w-1/2 mx-auto lg:mx-0" animation="wave" />
                                     </div>
                                 ) : (
-                                    <p className="max-w-2xl text-pretty text-lg text-gray-400 italic border-l-2 border-vedha-red pl-4">
-                                        "{tagline}"
-                                    </p>
+                                    <blockquote className="max-w-2xl text-pretty text-lg text-gray-300 italic border-l-2 border-vedha-red pl-4">
+                                        {tagline}
+                                    </blockquote>
                                 )}
                             </div>
 
-                            <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start">
+                            <nav className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row lg:justify-start" aria-label="Primary call-to-action">
                                 <Button
                                     asChild
                                     size="lg"
-                                    className="px-8 py-6 bg-vedha-blue hover:bg-blue-600 text-white rounded-full text-base font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all hover:scale-105">
+                                    className="px-8 py-6 bg-vedha-blue hover:bg-blue-600 text-white rounded-full text-base font-semibold shadow-[0_0_20px_rgba(59,130,246,0.3)] transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-vedha-blue focus:ring-offset-2 focus:ring-offset-[#030712]">
                                     <Link to="/services">
                                         <span className="text-nowrap">Explore Services</span>
                                     </Link>
@@ -79,22 +84,21 @@ export function HeroSection() {
                                     asChild
                                     size="lg"
                                     variant="ghost"
-                                    className="px-8 py-6 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-full border border-white/10">
+                                    className="px-8 py-6 text-base text-gray-300 hover:text-white hover:bg-white/10 rounded-full border border-white/10 focus:outline-none focus:ring-2 focus:ring-vedha-blue focus:ring-offset-2 focus:ring-offset-[#030712]">
                                     <Link to="/contact">
                                         <span className="text-nowrap">Request Consultation</span>
                                     </Link>
                                 </Button>
-                            </div>
+                            </nav>
                         </div>
-                        
-                        {/* Hero Image / Graphic */}
-                        <div className="pointer-events-none mt-12 lg:absolute lg:inset-0 lg:-right-20 lg:-top-20 lg:mt-0 lg:h-full lg:w-2/3 lg:object-contain z-10 opacity-80 mix-blend-lighten">
+
+                        <div className="pointer-events-none mt-12 lg:absolute lg:inset-0 lg:-right-20 lg:-top-20 lg:mt-0 lg:h-full lg:w-2/3 lg:object-contain z-10 opacity-80 mix-blend-lighten" aria-hidden="true">
                              <div className="absolute inset-0 bg-gradient-to-r from-[#030712] via-[#030712]/50 to-transparent"></div>
                              <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-transparent"></div>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
             
             {/* Logo Marquee */}
             <section className="bg-background pb-16 md:pb-24 border-b border-white/5">
@@ -123,6 +127,6 @@ export function HeroSection() {
                     </div>
                 </div>
             </section>
-        </main>
+        </section>
     )
 }
