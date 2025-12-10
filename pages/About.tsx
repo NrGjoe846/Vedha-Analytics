@@ -342,19 +342,22 @@ const About: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {teamMembers.map((member, index) => (
-                      <div 
-                        key={member.id} 
-                        className={`group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent transition-all duration-500 ${
-                            index % 2 === 0 
-                                ? 'hover:border-vedha-blue hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]' 
+                      <article
+                        key={member.id}
+                        className={`group relative h-[420px] rounded-2xl overflow-hidden cursor-pointer border border-transparent transition-all duration-500 focus-within:ring-2 focus-within:ring-vedha-blue ${
+                            index % 2 === 0
+                                ? 'hover:border-vedha-blue hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]'
                                 : 'hover:border-vedha-red hover:shadow-[0_0_30px_rgba(239,68,68,0.3)]'
                         }`}
                         onMouseEnter={() => handleTeamHover(member)}
+                        tabIndex={0}
+                        role="button"
+                        aria-label={`View details about ${member.name}, ${member.role}`}
                       >
-                          <img 
-                            src={member.imageUrl} 
-                            alt={member.name} 
-                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0" 
+                          <img
+                            src={member.imageUrl}
+                            alt={`Professional portrait of ${member.name}, ${member.role} at Vedha Analytics`}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/60 to-transparent opacity-90"></div>
                           
@@ -381,7 +384,7 @@ const About: React.FC = () => {
                                   </div>
                               </div>
                           </div>
-                      </div>
+                      </article>
                   ))}
               </div>
           </div>
