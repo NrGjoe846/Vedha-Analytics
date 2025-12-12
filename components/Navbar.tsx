@@ -42,14 +42,14 @@ const Navbar: React.FC = () => {
           <Link
             to="/"
             className="flex items-center space-x-3 group focus:outline-none focus:ring-2 focus:ring-vedha-blue rounded-lg"
-            aria-label="Veth Analytics Home"
+            aria-label="Vedha Analytics Home"
           >
             <div className="relative p-2" aria-hidden="true">
                 <div className="absolute inset-0 bg-gradient-to-tr from-vedha-blue to-vedha-red opacity-20 group-hover:opacity-40 blur-lg rounded-full transition-opacity"></div>
                 <Triangle className="h-6 w-6 text-vedha-silver fill-vedha-red stroke-vedha-blue group-hover:rotate-180 transition-transform duration-700" />
             </div>
             <span className="font-display font-bold text-xl tracking-wider text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-vedha-blue group-hover:to-vedha-red transition-all duration-300">
-              VETH<span className="text-vedha-blue">ANALYTICS</span>
+              VEDHA<span className="text-vedha-blue">ANALYTICS</span>
             </span>
           </Link>
 
