@@ -67,7 +67,7 @@ const Portfolio: React.FC = () => {
             className="text-center"
         >
             <div className="inline-block px-4 py-1.5 mb-6 rounded-full border border-vedha-red/30 bg-vedha-red/10 text-vedha-red text-xs font-bold tracking-widest uppercase animate-pulse-slow">
-                Veth Analytics Pvt. Ltd.
+                Vedha Analytics Pvt. Ltd.
             </div>
             <h1 className="mt-2 bg-gradient-to-br from-white to-gray-400 py-4 bg-clip-text text-4xl md:text-7xl font-display font-bold tracking-tight text-transparent">
                 Political Intelligence <br /> & Strategic Insight
@@ -117,7 +117,7 @@ const Portfolio: React.FC = () => {
         </div>
       </section>
 
-      {/* 4. COMPARISON GRID: Why Choose Veth */}
+      {/* 4. COMPARISON GRID: Why Choose Vedha */}
       <section className="py-24 bg-[#030712]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
@@ -139,11 +139,11 @@ const Portfolio: React.FC = () => {
                     </ul>
                 </div>
 
-                {/* Veth Way */}
+                {/* Vedha Way */}
                 <div className="p-8 rounded-3xl border border-vedha-blue/30 bg-gradient-to-br from-vedha-blue/5 to-vedha-red/5 relative overflow-hidden">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-vedha-blue/10 rounded-full blur-3xl"></div>
                     <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                        <CheckCircle2 className="text-vedha-blue" /> Veth Intelligence
+                        <CheckCircle2 className="text-vedha-blue" /> Vedha Intelligence
                     </h3>
                     <ul className="space-y-4 text-gray-300">
                         <li className="flex gap-3">
