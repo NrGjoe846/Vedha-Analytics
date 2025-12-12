@@ -14,7 +14,7 @@ export const generateTagline = async (visitorType: 'Corporate' | 'Government' | 
   try {
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
-      contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Veth Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
+      contents: `Generate a short, punchy, futuristic tagline (under 10 words) for 'Vedha Analytics', a premium Indian IT and Government AI consultancy, tailored for a ${visitorType} audience. Focus on core offerings like GovTech, AI, and Big Data. Do not include quotes.`,
     });
     return response.text?.trim() || "Innovating India Through Technology";
   } catch (error) {
@@ -125,7 +125,7 @@ export const streamChatResponse = async function* (history: { role: string; part
     const chat = ai.chats.create({
       model: 'gemini-3-pro-preview',
       config: {
-        systemInstruction: "You are 'Veth AI', the advanced assistant for Veth Analytics. You are professional, concise, and knowledgeable about IT, Government projects, and AI. Tone: Premium, helpful, futuristic.",
+        systemInstruction: "You are 'Vedha AI', the advanced assistant for Vedha Analytics. You are professional, concise, and knowledgeable about IT, Government projects, and AI. Tone: Premium, helpful, futuristic.",
       },
       history: history,
     });
